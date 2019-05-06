@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\SQLiteCpp">
+      <UniqueIdentifier>{5e883e14-7481-4d5f-bde7-4e7e9ea260c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\CQSDK">
+      <UniqueIdentifier>{5da4c863-f9da-4578-a769-5c980f43bacb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\CQSDK">
+      <UniqueIdentifier>{bec1e517-5f10-4dbc-a900-7b8418a6ed79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\SQLiteCpp">
+      <UniqueIdentifier>{8702cb9d-a18e-4a89-bbcf-110abe1973a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SQLite">
+      <UniqueIdentifier>{c503469a-61f8-42e9-97c4-55a80f2a643b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\SQLite">
+      <UniqueIdentifier>{27d5cd8d-dfb7-4d46-914f-bda141db60c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\SQLiteCpp\Assertion.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Backup.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Column.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Database.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Exception.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\SQLiteCpp.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Statement.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Transaction.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\Utils.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLiteCpp\VariadicBind.h">
+      <Filter>头文件\SQLiteCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="EncodingConvert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="S3PutObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveLog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MsgType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\bufstream.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQAPI.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQAPI_EX.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQconstant.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\cqdefine.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_ALL.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_DiscussMsg.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_FriendAdd.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_GroupMsg.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_PrivateMsg.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_RequestAddFriend.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_RequestAddGroup.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVE_Status.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVEBasic.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVEMsg.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQEVERequest.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQface.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQLogger.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQMsgCode.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQMsgSend.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\CQTools.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\CQSDK\Unpack.h">
+      <Filter>头文件\CQSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="APPINFO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\SQLite\sqlite3.h">
+      <Filter>头文件\SQLite</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EncodingConvert.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="S3PutObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalVar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\CQAPI.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\CQAPI_EX.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\CQEVE.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\CQstream.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\CQTools.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CQSDK\Unpack.cpp">
+      <Filter>源文件\CQSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Backup.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Column.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Database.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Exception.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Statement.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLiteCpp\Transaction.cpp">
+      <Filter>源文件\SQLiteCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SQLite\sqlite3.c">
+      <Filter>源文件\SQLite</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="com.w4123.trpglogger.json">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="CQP.lib">
+      <Filter>资源文件</Filter>
+    </Library>
+  </ItemGroup>
+</Project>

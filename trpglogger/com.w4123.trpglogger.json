@@ -1,0 +1,60 @@
+{
+  "ret": 1,
+  "apiver": 9,
+  "name": "TrpgLogger",
+  "version": "1.0.1",
+  "version_id": 15,
+  "author": "w4123溯洄",
+  "description": "跑团日志记录器",
+  "event": [
+    {
+      "id": 1,
+      "type": 2,
+      "name": "群消息处理",
+      "function": "eventGroupMsg",
+      "priority": 30000
+    },
+    {
+      "id": 2,
+      "type": 4,
+      "name": "讨论组消息处理",
+      "function": "eventDiscussMsg",
+      "priority": 30000
+    },
+    {
+      "id": 3,
+      "type": 21,
+      "name": "私聊消息处理",
+      "function": "eventPrivateMsg",
+      "priority": 30000
+    },
+    {
+      "id": 4,
+      "type": 1003,
+      "name": "启用事件处理",
+      "function": "eventEnable",
+      "priority": 30000
+    },
+    {
+      "id": 5,
+      "type": 1004,
+      "name": "禁用事件处理",
+      "function": "eventDisable",
+      "priority": 30000
+    },
+    {
+      "id": 6,
+      "type": 1002,
+      "name": "退出事件处理",
+      "function": "eventExit",
+      "priority": 30000
+    }
+  ],
+  "auth": [
+    101,
+    103,
+    106,
+    130,
+    131
+  ]
+}
