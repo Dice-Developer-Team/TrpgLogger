@@ -71,6 +71,19 @@ EVE_Enable(eventEnable)
 // 群聊部分
 EVE_GroupMsg_EX(eventGroupMsg)
 {
+	std::string strAt = "[CQ:at,qq=" + std::to_string(CQ::getLoginQQ()) + "]";
+	if (eve.message.substr(0, 6) == "[CQ:at")
+	{
+		if (eve.message.substr(0, strAt.length()) != strAt)
+		{
+			return;
+		}
+		eve.message = eve.message.substr(strAt.length());
+	}
+	while (eve.message[0] == ' ')
+	{
+		eve.message.erase(eve.message.begin());
+	}
 	if (eve.message.substr(0, 2) == "。")
 	{
 		eve.message.erase(eve.message.begin());
@@ -148,6 +161,19 @@ EVE_GroupMsg_EX(eventGroupMsg)
 // 讨论组部分
 EVE_DiscussMsg_EX(eventDiscussMsg)
 {
+	std::string strAt = "[CQ:at,qq=" + std::to_string(CQ::getLoginQQ()) + "]";
+	if (eve.message.substr(0, 6) == "[CQ:at")
+	{
+		if (eve.message.substr(0, strAt.length()) != strAt)
+		{
+			return;
+		}
+		eve.message = eve.message.substr(strAt.length());
+	}
+	while (eve.message[0] == ' ')
+	{
+		eve.message.erase(eve.message.begin());
+	}
 	if (eve.message.substr(0, 2) == "。")
 	{
 		eve.message.erase(eve.message.begin());
