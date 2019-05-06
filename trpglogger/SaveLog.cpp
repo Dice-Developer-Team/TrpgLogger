@@ -76,6 +76,10 @@ std::string saveLog(time_t time_start, time_t now, long long groupNum, MsgType m
 					{
 						msg.replace(at_left, at_right - at_left + 1, u8"@" + GBKToUTF8(!CQ::getGroupMemberInfo(groupNum, qqNum).GroupNick.empty() ? CQ::getGroupMemberInfo(groupNum, qqNum).GroupNick : CQ::getStrangerInfo(qqNum).nick));
 					}
+					else
+					{
+						msg.replace(at_left, at_right - at_left + 1, u8"@" + GBKToUTF8(CQ::getStrangerInfo(qqNum).nick));
+					}
 				}
 				
 				at_left = msg.find("[CQ:at");
