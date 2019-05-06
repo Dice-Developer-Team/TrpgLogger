@@ -25,8 +25,6 @@ QQ跑团记录记录器
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
     
-    Copyright (c) 2012-2019 Sébastien Rombauts (sebastien.rombauts@gmail.com)
-    
 # 开源软件许可协议
 本软件中使用了以下开源软件包:
 
