@@ -28,7 +28,7 @@ QQ跑团记录记录器
 # 开源软件许可协议
 本软件中使用了以下开源软件包:
 
-1. SQLite Public Domain
+1. SQLite https://www.sqlite.org Public Domain
 
 2. SQLitecpp https://github.com/SRombauts/SQLiteCpp MIT
     
