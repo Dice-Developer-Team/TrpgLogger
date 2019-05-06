@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+/trpglogger/x64/Debug
+/Release
+/trpglogger/Release
+/.vs/trpglogger/v15
+/packages

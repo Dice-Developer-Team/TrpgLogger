@@ -9,7 +9,7 @@
 // 全局应用目录
 extern std::string fileLoc;
 // 全局数据库路径
-extern std::string dbLoc;
+extern std::string dbLoc_UTF8;
 // Aws SDK设置
 extern Aws::SDKOptions options;
 // Aws Credentials

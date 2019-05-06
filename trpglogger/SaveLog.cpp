@@ -27,7 +27,7 @@ std::string saveLog(time_t time_start, time_t now, long long groupNum, MsgType m
 	try
 	{
 		// 创建日志数据库对象及语句，绑定参数
-		SQLite::Database db(dbLoc,SQLite::OPEN_READONLY,3000);
+		SQLite::Database db(dbLoc_UTF8, SQLite::OPEN_READONLY, 3000);
 		SQLite::Statement query(db, SQL);
 		if (msgType == MsgType::Group)
 		{

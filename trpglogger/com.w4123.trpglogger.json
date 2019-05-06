@@ -2,8 +2,8 @@
   "ret": 1,
   "apiver": 9,
   "name": "TrpgLogger",
-  "version": "1.0.1",
-  "version_id": 15,
+  "version": "1.0.2",
+  "version_id": 16,
   "author": "w4123溯洄",
   "description": "跑团日志记录器",
   "event": [

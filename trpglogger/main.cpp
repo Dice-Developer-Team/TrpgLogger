@@ -17,6 +17,7 @@
 #include "GlobalVar.h"
 #include "SaveLog.h"
 #include "MsgType.h"
+#include "EncodingConvert.h"
 
 EVE_Enable(eventEnable)
 {
@@ -39,7 +40,7 @@ EVE_Enable(eventEnable)
 
 	// 由可执行文件路径获取日志数据库路径
 	std::string tempLoc(fileName);
-	dbLoc = tempLoc.substr(0, tempLoc.find_last_of('\\')) + "\\data\\" + std::to_string(CQ::getLoginQQ()) + "\\eventv2.db";
+	dbLoc_UTF8 = GBKToUTF8(tempLoc.substr(0, tempLoc.find_last_of('\\')) + "\\data\\" + std::to_string(CQ::getLoginQQ()) + "\\eventv2.db");
 
 	std::ifstream readSessionGroup(fileLoc + "Group.session");
 	if (readSessionGroup)
