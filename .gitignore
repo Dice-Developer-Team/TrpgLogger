@@ -35,3 +35,5 @@
 /trpglogger/Release
 /.vs/trpglogger/v15
 /packages
+/Debug
+/trpglogger/Debug
