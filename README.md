@@ -4,7 +4,11 @@ QQ跑团记录记录器
 用来记录跑团记录的酷Q插件 与 https://logpainter.kokona.tech 配合使用
 
 # 编译
-请使用 Visual Studio 2015或2017编译, 编译前需要先还原nuget软件包
+请使用 Visual Studio 2015及以上进行编译, 编译前需要先还原nuget软件包
+
+# Q&A
+Q: 上传时遇到网络错误?   
+A: 因为使用的是AWS S3存储，在墙外，所以服务器在墙内的话可能有时候连接不太稳定
 
 # 协议
 本软件采用AGPLv3协议
