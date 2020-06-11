@@ -139,9 +139,6 @@ int CQ::sendDiscussMsg(const long long DiscussID, const std::string& msg) { retu
 //发送赞
 int CQ::sendLike(const long long QQID, const int times) { return lasterr = CQ_sendLikeV2(getAuthCode(), QQID, times); }
 
-//取Cookies (慎用，此接口需要严格授权)
-const char* CQ::getCookies() { return CQ_getCookies(getAuthCode()); }
-
 //接收语音
 const char* CQ::getRecord(const char* file, const char* outformat)
 {

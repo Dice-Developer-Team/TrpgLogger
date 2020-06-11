@@ -49,11 +49,6 @@ namespace CQ
 		long long QQID, // 目标QQ 
 		int times // 赞的次数，最多10次 
 	);
-	//取Cookies (慎用，此接口需要严格授权) 
-	//Auth=20 慎用,此接口需要严格授权 
-	CQAPI(CQ_getCookies, const char *)(
-		int AuthCode // 
-	);
 	//接收语音 
 	CQAPI(CQ_getRecord, const char *)(
 		int AuthCode, // 

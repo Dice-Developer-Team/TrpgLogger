@@ -17,4 +17,4 @@ bool Enabled = false;
 std::map<long long, time_t> LogInfo;		// 群
 std::map<long long, time_t> LogInfoDiscuss;	// 讨论组
 // 版本信息
-const std::string TrpgLoggerVer = "TrpgLogger by w4123溯洄 Version 1.0.3(17)";
+const std::string TrpgLoggerVer = "TrpgLogger by w4123溯洄 Version 1.0.4(18)";

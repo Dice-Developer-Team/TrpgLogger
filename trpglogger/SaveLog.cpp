@@ -6,10 +6,10 @@
 #include <CQTools.h>
 
 #include "GlobalVar.h"
-#include "SQLiteCpp/Database.h"
 #include "CQAPI_EX.h"
 #include "EncodingConvert.h"
 #include "MsgType.h"
+#include "SQLiteCpp/Database.h"
 
 
 const std::string SQL = "SELECT account, content, time FROM event WHERE ([group] = ? AND time >= ? AND time <= ? AND (type = 2 OR type = 2001))";

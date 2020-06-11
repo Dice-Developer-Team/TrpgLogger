@@ -19,6 +19,8 @@
 #include "MsgType.h"
 #include "EncodingConvert.h"
 
+void save();
+
 EVE_Enable(eventEnable)
 {
 	// 设置应用为已启用
@@ -31,8 +33,8 @@ EVE_Enable(eventEnable)
 	fileLoc = CQ::getAppDirectory();
 
 	// 获取可执行文件路径
-	char fileName[256];
-	const int ret = GetModuleFileNameA(nullptr, fileName, 256);
+	char fileName[MAX_PATH];
+	const int ret = GetModuleFileNameA(nullptr, fileName, MAX_PATH);
 	if (ret == 0 || GetLastError() == ERROR_INSUFFICIENT_BUFFER)
 	{
 		return -1;
@@ -101,6 +103,7 @@ EVE_GroupMsg_EX(eventGroupMsg)
 		{
 			eve.sendMsg("开始日志记录");
 			LogInfo[eve.fromGroup] = time(nullptr);
+			save();
 		}
 	}
 	else if (eve.message == ".log stop" || eve.message == ".logstop" || eve.message == ".logend" || eve.message == ".log end" || eve.message == ".log off" || eve.message == ".logoff" || eve.message == ".log fin" || eve.message == ".logfin")
@@ -113,7 +116,6 @@ EVE_GroupMsg_EX(eventGroupMsg)
 
 			// 读取记录信息
 			const time_t time_start(LogInfo[eve.fromGroup]);
-			LogInfo.erase(eve.fromGroup);
 
 			// 获取记录结束时间
 			const time_t now = time(nullptr);
@@ -130,7 +132,7 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			}
 			else
 			{
-				eve.sendMsg(save_log_res);
+				eve.sendMsg("保存失败，您可以尝试稍后重试此命令再次保存\n错误信息: " + save_log_res);
 				return;
 			}
 			
@@ -139,12 +141,14 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			if (put_obj_res == "SUCCESS")
 			{
 				eve.sendMsg("上传已完成，请访问 https://logpainter.kokona.tech/?s3=" + fileName + " 以查看记录");
+				LogInfo.erase(eve.fromGroup);
+				save();
 			}
 			else
 			{
-				eve.sendMsg("上传过程中发生错误，请联系管理员\n错误信息: " + put_obj_res);
+				eve.sendMsg("上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息: " + put_obj_res);
 			}
-			
+
 		}
 		else
 		{
@@ -191,6 +195,7 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 		{
 			eve.sendMsg("开始日志记录");
 			LogInfoDiscuss[eve.fromDiscuss] = time(nullptr);
+			save();
 		}
 	}
 	else if (eve.message == ".log stop" || eve.message == ".logstop" || eve.message == ".logend" || eve.message == ".log end" || eve.message == ".log off" || eve.message == ".logoff" || eve.message == ".log fin" || eve.message == ".logfin")
@@ -203,7 +208,6 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 
 			// 读取记录信息
 			const time_t time_start(LogInfoDiscuss[eve.fromDiscuss]);
-			LogInfoDiscuss.erase(eve.fromDiscuss);
 
 			// 获取记录结束时间
 			const time_t now = time(nullptr);
@@ -220,7 +224,7 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			}
 			else
 			{
-				eve.sendMsg(save_log_res);
+				eve.sendMsg("保存失败，您可以尝试稍后重试此命令再次保存\n错误信息: " + save_log_res);
 				return;
 			}
 
@@ -229,10 +233,12 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			if (put_obj_res == "SUCCESS")
 			{
 				eve.sendMsg("上传已完成，请访问 https://logpainter.kokona.tech/?s3=" + fileName + " 以查看记录");
+				LogInfoDiscuss.erase(eve.fromDiscuss);
+				save();
 			}
 			else
 			{
-				eve.sendMsg("上传过程中发生错误，请联系管理员\n错误信息: " + put_obj_res);
+				eve.sendMsg("上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息: " + put_obj_res);
 			}
 
 		}
@@ -263,16 +269,8 @@ EVE_PrivateMsg_EX(eventPrivateMsg)
 		eve.sendMsg(TrpgLoggerVer + "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助\n请注意命令仅会在群/讨论组中生效");
 	}
 }
-
-EVE_Disable(eventDisable)
+void save()
 {
-	// 设置应用为未启用
-	Enabled = false;
-
-	// 释放Aws API资源
-	Aws::ShutdownAPI(options);
-
-	// 保存Session信息并清空内存中的信息
 	std::ofstream saveSessionGroup(fileLoc + "Group.session", std::ios::out | std::ios::trunc);
 	if (saveSessionGroup)
 	{
@@ -282,7 +280,6 @@ EVE_Disable(eventDisable)
 		}
 	}
 	saveSessionGroup.close();
-	LogInfo.clear();
 
 	std::ofstream saveSessionDiscuss(fileLoc + "Discuss.session", std::ios::out | std::ios::trunc);
 	if (saveSessionDiscuss)
@@ -293,7 +290,20 @@ EVE_Disable(eventDisable)
 		}
 	}
 	saveSessionDiscuss.close();
+}
+EVE_Disable(eventDisable)
+{
+	// 设置应用为未启用
+	Enabled = false;
+
+	// 释放Aws API资源
+	Aws::ShutdownAPI(options);
+
+	// 保存Session信息并清空内存中的信息
+	save();
+	LogInfo.clear();
 	LogInfoDiscuss.clear();
+	
 	return 0;
 }
 
