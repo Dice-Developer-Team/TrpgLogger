@@ -3,6 +3,7 @@
 #define TRPGLOGGER_GLOBALVAR
 
 #include <string>
+#include <map>
 #include <aws/core/auth/AWSCredentialsProvider.h>
 #include <aws/core/Aws.h>
 
@@ -21,5 +22,8 @@ extern std::map<long long, time_t> LogInfo;			// 群
 extern std::map<long long, time_t> LogInfoDiscuss;	// 讨论组
 // 版本信息
 extern const std::string TrpgLoggerVer;
+//自定义回执
+extern std::string CustomReplyLoc_UTF8;
+extern std::map<std::string, std::string> CustomReply;
 
 #endif /*TRPGLOGGER_GLOBALVAR*/

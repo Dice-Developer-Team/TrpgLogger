@@ -153,6 +153,12 @@
     <ClInclude Include="..\include\SQLite\sqlite3.h">
       <Filter>头文件\SQLite</Filter>
     </ClInclude>
+    <ClInclude Include="cJSON.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CJsonObject.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -211,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="..\src\SQLite\sqlite3.c">
       <Filter>源文件\SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="cJSON.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CJsonObject.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
