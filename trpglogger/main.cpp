@@ -116,11 +116,11 @@ EVE_GroupMsg_EX(eventGroupMsg)
 		eve.message_block();
 		if (LogInfo.count(eve.fromGroup))
 		{
-			eve.sendMsg(CustomReply["AlreadyLogging"]);
+			eve.sendMsg(CustomReply["strAlreadyLogging"]);
 		}
 		else
 		{
-			eve.sendMsg(CustomReply["StartLogging"]);
+			eve.sendMsg(CustomReply["strStartLogging"]);
 			LogInfo[eve.fromGroup] = time(nullptr);
 			save();
 		}
@@ -131,7 +131,7 @@ EVE_GroupMsg_EX(eventGroupMsg)
 		if (LogInfo.count(eve.fromGroup))
 		{
 			// 开始保存日志
-			eve.sendMsg(CustomReply["StartSaveLog"]);
+			eve.sendMsg(CustomReply["strStartSaveLog"]);
 
 			// 读取记录信息
 			const time_t time_start(LogInfo[eve.fromGroup]);
@@ -147,11 +147,11 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			const std::string save_log_res = saveLog(time_start, now, eve.fromGroup, MsgType::Group, logLoc);
 			if (save_log_res=="SUCCESS")
 			{
-				eve.sendMsg(CustomReply["SuccessSaveLog"]);
+				eve.sendMsg(CustomReply["strSuccessSaveLog"]);
 			}
 			else
 			{
-				eve.sendMsg(CustomReply["FailSaveLog"] + " " + save_log_res);
+				eve.sendMsg(CustomReply["strFailSaveLog"] + " " + save_log_res);
 				return;
 			}
 			
@@ -159,25 +159,25 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			const std::string put_obj_res = put_s3_object("dicelogger", fileName, logLoc, "ap-southeast-1");
 			if (put_obj_res == "SUCCESS")
 			{
-				eve.sendMsg(CustomReply["SuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["SuccessUploadLogAfter"]);
+				eve.sendMsg(CustomReply["strSuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["strSuccessUploadLogAfter"]);
 				LogInfo.erase(eve.fromGroup);
 				save();
 			}
 			else
 			{
-				eve.sendMsg(CustomReply["FailUploadLog"] + " " + put_obj_res);
+				eve.sendMsg(CustomReply["strFailUploadLog"] + " " + put_obj_res);
 			}
 
 		}
 		else
 		{
-			eve.sendMsg(CustomReply["NeverLog"]);
+			eve.sendMsg(CustomReply["strNeverLog"]);
 		}
 	}
 	else if (eve.message == ".log help" || eve.message == ".loghelp")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + CustomReply["LogHlp"]);
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 
@@ -208,11 +208,11 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 		eve.message_block();
 		if (LogInfoDiscuss.count(eve.fromDiscuss))
 		{
-			eve.sendMsg(CustomReply["AlreadyLogging"]);
+			eve.sendMsg(CustomReply["strAlreadyLogging"]);
 		}
 		else
 		{
-			eve.sendMsg(CustomReply["StartLogging"]);
+			eve.sendMsg(CustomReply["strStartLogging"]);
 			LogInfoDiscuss[eve.fromDiscuss] = time(nullptr);
 			save();
 		}
@@ -223,7 +223,7 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 		if (LogInfoDiscuss.count(eve.fromDiscuss))
 		{
 			// 开始保存日志
-			eve.sendMsg(CustomReply["StartSaveLog"]);
+			eve.sendMsg(CustomReply["strStartSaveLog"]);
 
 			// 读取记录信息
 			const time_t time_start(LogInfoDiscuss[eve.fromDiscuss]);
@@ -239,11 +239,11 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			const std::string save_log_res = saveLog(time_start, now, eve.fromDiscuss, MsgType::Discuss, logLoc);
 			if (save_log_res == "SUCCESS")
 			{
-				eve.sendMsg(CustomReply["SuccessSaveLog"]);
+				eve.sendMsg(CustomReply["strSuccessSaveLog"]);
 			}
 			else
 			{
-				eve.sendMsg(CustomReply["FailSaveLog"] + " " + save_log_res);
+				eve.sendMsg(CustomReply["strFailSaveLog"] + " " + save_log_res);
 				return;
 			}
 
@@ -251,25 +251,25 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			const std::string put_obj_res = put_s3_object("dicelogger", fileName, logLoc, "ap-southeast-1");
 			if (put_obj_res == "SUCCESS")
 			{
-				eve.sendMsg(CustomReply["SuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["SuccessUploadLogAfter"]);
+				eve.sendMsg(CustomReply["strSuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["strSuccessUploadLogAfter"]);
 				LogInfoDiscuss.erase(eve.fromDiscuss);
 				save();
 			}
 			else
 			{
-				eve.sendMsg(CustomReply["FailUploadLog"] + " " + put_obj_res);
+				eve.sendMsg(CustomReply["strFailUploadLog"] + " " + put_obj_res);
 			}
 
 		}
 		else
 		{
-			eve.sendMsg(CustomReply["NeverLog"]);
+			eve.sendMsg(CustomReply["strNeverLog"]);
 		}
 	}
 	else if (eve.message == ".log help" || eve.message == ".loghelp")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + CustomReply["LogHlp"]);
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 
@@ -285,7 +285,7 @@ EVE_PrivateMsg_EX(eventPrivateMsg)
 	if(eve.message.substr(0,4) == ".log")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + CustomReply["LogHlp"]);
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 void save()

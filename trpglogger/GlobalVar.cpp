@@ -25,16 +25,16 @@ std::string CustomReplyLoc_UTF8;
 std::map<std::string, std::string> CustomReply
 {
 	{"self", "我"},
-	{"AlreadyLogging", "正在进行日志记录, 无法再次开始!"},
-	{"StartLogging", "开始日志记录"},
-	{"StartSaveLog", "正在保存日志"},
-	{"SuccessSaveLog", "日志记录已结束，文件已保存，正在上传至服务器"},
-	{"FailSaveLog", "保存失败，您可以尝试稍后重试此命令再次保存\n错误信息:"},
-	{"SuccessUploadLogBefore", "上传已完成，请访问"},
-	{"SuccessUploadLogAfter", "以查看记录"},
-	{"FailUploadLog", "上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息:"},
-	{"NeverLog", "没有已开始的日志记录!"},
-	{"LogHlp", "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助"}
+	{"strAlreadyLogging", "正在进行日志记录, 无法再次开始!"},
+	{"strStartLogging", "开始日志记录"},
+	{"strStartSaveLog", "正在保存日志"},
+	{"strSuccessSaveLog", "日志记录已结束，文件已保存，正在上传至服务器"},
+	{"strFailSaveLog", "保存失败，您可以尝试稍后重试此命令再次保存\n错误信息:"},
+	{"strSuccessUploadLogBefore", "上传已完成，请访问"},
+	{"strSuccessUploadLogAfter", "以查看记录"},
+	{"strFailUploadLog", "上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息:"},
+	{"strNeverLog", "没有已开始的日志记录!"},
+	{"strLogHlp", "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助"}
 };
 //静态替换
 std::string& replace_all(std::string& str, const std::string& old_value, const std::string& new_value)
