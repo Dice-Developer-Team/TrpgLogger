@@ -24,6 +24,7 @@ const std::string TrpgLoggerVer = "TrpgLogger by w4123溯洄 Version 1.0.4(18)";
 std::string CustomReplyLoc_UTF8;
 std::map<std::string, std::string> CustomReply
 {
+	{"self", "我"},
 	{"AlreadyLogging", "正在进行日志记录, 无法再次开始!"},
 	{"StartLogging", "开始日志记录"},
 	{"StartSaveLog", "正在保存日志"},
@@ -35,3 +36,20 @@ std::map<std::string, std::string> CustomReply
 	{"NeverLog", "没有已开始的日志记录!"},
 	{"LogHlp", "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助"}
 };
+//静态替换
+std::string& replace_all(std::string& str, const std::string& old_value, const std::string& new_value)
+{
+	while (true)
+	{
+		std::string::size_type pos(0);
+		if ((pos = str.find(old_value)) != std::string::npos)
+		{
+			str.replace(pos, old_value.length(), new_value);
+		}
+		else
+		{
+			break;
+		}
+	}
+	return str;
+}

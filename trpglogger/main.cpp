@@ -72,13 +72,18 @@ EVE_Enable(eventEnable)
 	// 由可执行文件路径获取自定义回执路径
 	CustomReplyLoc_UTF8 = GBKToUTF8(tempLoc.substr(0, tempLoc.find_last_of('\\')) + "\\LogData\\CustomReply.json");
 
+	//加载自定义回执配置文件
 	std::ifstream CustomReplyJSON(CustomReplyLoc_UTF8, std::ios::in);
 	std::stringstream CustomReplyJSONsstr;
 	CustomReplyJSONsstr << CustomReplyJSON.rdbuf();
 	neb::CJsonObject CustomReplyJSONobj(UTF8ToGBK(CustomReplyJSONsstr.str()));
+
+	//加载自定义回执
+	CustomReply["self"] = CQ::getLoginNick();
 	for (auto &it : CustomReply)
 	{
 		CustomReplyJSONobj.Get(it.first, CustomReply[it.first]);
+		replace_all(CustomReply[it.first], "{self}", CustomReply["self"]);
 	}
 
 	return 0;
