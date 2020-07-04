@@ -18,7 +18,7 @@
 #include "SaveLog.h"
 #include "MsgType.h"
 #include "EncodingConvert.h"
-#include "CJsonObject.hpp"
+#include "Jsonio.h"
 
 void save();
 
@@ -73,16 +73,15 @@ EVE_Enable(eventEnable)
 	CustomReplyLoc_UTF8 = GBKToUTF8(tempLoc.substr(0, tempLoc.find_last_of('\\')) + "\\LogData\\CustomReply.json");
 
 	//加载自定义回执配置文件
-	std::ifstream CustomReplyJSON(CustomReplyLoc_UTF8, std::ios::in);
-	std::stringstream CustomReplyJSONsstr;
-	CustomReplyJSONsstr << CustomReplyJSON.rdbuf();
-	neb::CJsonObject CustomReplyJSONobj(UTF8ToGBK(CustomReplyJSONsstr.str()));
-
+	nlohmann::json CustomReplyJSONobj = freadJson(CustomReplyLoc_UTF8);
 	//加载自定义回执
 	CustomReply["self"] = CQ::getLoginNick();
-	for (auto &it : CustomReply)
+	for (const auto &it : CustomReply)
 	{
-		CustomReplyJSONobj.Get(it.first, CustomReply[it.first]);
+		if (CustomReplyJSONobj.find(it.first) != CustomReplyJSONobj.end())
+		{
+			CustomReply[it.first] = UTF8ToGBK(CustomReplyJSONobj.find(it.first).value());
+		}
 		replace_all(CustomReply[it.first], "{self}", CustomReply["self"]);
 	}
 
