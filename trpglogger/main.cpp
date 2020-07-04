@@ -2,6 +2,7 @@
 //
 
 #include <map>
+#include <vector>
 #include <ctime>
 #include <future>
 #include <string>
@@ -18,6 +19,7 @@
 #include "SaveLog.h"
 #include "MsgType.h"
 #include "EncodingConvert.h"
+#include "Jsonio.h"
 
 void save();
 
@@ -67,6 +69,32 @@ EVE_Enable(eventEnable)
 		}
 	}
 	readSessionDiscuss.close();
+
+	// 由可执行文件路径获取自定义回执路径
+	CustomReplyLoc_UTF8 = GBKToUTF8(tempLoc.substr(0, tempLoc.find_last_of('\\')) + "\\LogData\\CustomReply.json");
+
+	//加载自定义回执配置文件
+	nlohmann::json CustomReplyJSONobj = freadJson(CustomReplyLoc_UTF8);
+	//加载自定义回执
+	CustomReply["self"] = CQ::getLoginNick();
+	for (const auto &it_m : CustomReply)
+	{
+		if (CustomReplyJSONobj.find(it_m.first) != CustomReplyJSONobj.end())
+		{
+			CustomReply[it_m.first] = UTF8ToGBK(CustomReplyJSONobj.find(it_m.first).value());
+		}
+	}
+	for (const auto& it_m : CustomReply)
+	{
+		if (std::find(CustomReplyFilter.begin(), CustomReplyFilter.end(), it_m.first) == CustomReplyFilter.end())
+		{
+			for (const auto& it_v : CustomReplyFilter)
+			{
+				replace_all(CustomReply[it_m.first], "{" + it_v + "}", CustomReply[it_v]);
+			}
+		}
+	}
+
 	return 0;
 }
 
@@ -97,11 +125,11 @@ EVE_GroupMsg_EX(eventGroupMsg)
 		eve.message_block();
 		if (LogInfo.count(eve.fromGroup))
 		{
-			eve.sendMsg("正在进行日志记录, 无法再次开始!");
+			eve.sendMsg(CustomReply["strAlreadyLogging"]);
 		}
 		else
 		{
-			eve.sendMsg("开始日志记录");
+			eve.sendMsg(CustomReply["strStartLogging"]);
 			LogInfo[eve.fromGroup] = time(nullptr);
 			save();
 		}
@@ -112,7 +140,7 @@ EVE_GroupMsg_EX(eventGroupMsg)
 		if (LogInfo.count(eve.fromGroup))
 		{
 			// 开始保存日志
-			eve.sendMsg("正在保存日志");
+			eve.sendMsg(CustomReply["strStartSaveLog"]);
 
 			// 读取记录信息
 			const time_t time_start(LogInfo[eve.fromGroup]);
@@ -128,11 +156,11 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			const std::string save_log_res = saveLog(time_start, now, eve.fromGroup, MsgType::Group, logLoc);
 			if (save_log_res=="SUCCESS")
 			{
-				eve.sendMsg("日志记录已结束，文件已保存，正在上传至服务器");
+				eve.sendMsg(CustomReply["strSuccessSaveLog"]);
 			}
 			else
 			{
-				eve.sendMsg("保存失败，您可以尝试稍后重试此命令再次保存\n错误信息: " + save_log_res);
+				eve.sendMsg(CustomReply["strFailSaveLog"] + " " + save_log_res);
 				return;
 			}
 			
@@ -140,25 +168,25 @@ EVE_GroupMsg_EX(eventGroupMsg)
 			const std::string put_obj_res = put_s3_object("dicelogger", fileName, logLoc, "ap-southeast-1");
 			if (put_obj_res == "SUCCESS")
 			{
-				eve.sendMsg("上传已完成，请访问 https://logpainter.kokona.tech/?s3=" + fileName + " 以查看记录");
+				eve.sendMsg(CustomReply["strSuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["strSuccessUploadLogAfter"]);
 				LogInfo.erase(eve.fromGroup);
 				save();
 			}
 			else
 			{
-				eve.sendMsg("上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息: " + put_obj_res);
+				eve.sendMsg(CustomReply["strFailUploadLog"] + " " + put_obj_res);
 			}
 
 		}
 		else
 		{
-			eve.sendMsg("没有已开始的日志记录!");
+			eve.sendMsg(CustomReply["strNeverLog"]);
 		}
 	}
 	else if (eve.message == ".log help" || eve.message == ".loghelp")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助");
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 
@@ -189,11 +217,11 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 		eve.message_block();
 		if (LogInfoDiscuss.count(eve.fromDiscuss))
 		{
-			eve.sendMsg("正在进行日志记录, 无法再次开始!");
+			eve.sendMsg(CustomReply["strAlreadyLogging"]);
 		}
 		else
 		{
-			eve.sendMsg("开始日志记录");
+			eve.sendMsg(CustomReply["strStartLogging"]);
 			LogInfoDiscuss[eve.fromDiscuss] = time(nullptr);
 			save();
 		}
@@ -204,7 +232,7 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 		if (LogInfoDiscuss.count(eve.fromDiscuss))
 		{
 			// 开始保存日志
-			eve.sendMsg("正在保存日志");
+			eve.sendMsg(CustomReply["strStartSaveLog"]);
 
 			// 读取记录信息
 			const time_t time_start(LogInfoDiscuss[eve.fromDiscuss]);
@@ -220,11 +248,11 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			const std::string save_log_res = saveLog(time_start, now, eve.fromDiscuss, MsgType::Discuss, logLoc);
 			if (save_log_res == "SUCCESS")
 			{
-				eve.sendMsg("日志记录已结束，文件已保存，正在上传至服务器");
+				eve.sendMsg(CustomReply["strSuccessSaveLog"]);
 			}
 			else
 			{
-				eve.sendMsg("保存失败，您可以尝试稍后重试此命令再次保存\n错误信息: " + save_log_res);
+				eve.sendMsg(CustomReply["strFailSaveLog"] + " " + save_log_res);
 				return;
 			}
 
@@ -232,25 +260,25 @@ EVE_DiscussMsg_EX(eventDiscussMsg)
 			const std::string put_obj_res = put_s3_object("dicelogger", fileName, logLoc, "ap-southeast-1");
 			if (put_obj_res == "SUCCESS")
 			{
-				eve.sendMsg("上传已完成，请访问 https://logpainter.kokona.tech/?s3=" + fileName + " 以查看记录");
+				eve.sendMsg(CustomReply["strSuccessUploadLogBefore"] + " https://logpainter.kokona.tech/?s3=" + fileName + " " + CustomReply["strSuccessUploadLogAfter"]);
 				LogInfoDiscuss.erase(eve.fromDiscuss);
 				save();
 			}
 			else
 			{
-				eve.sendMsg("上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息: " + put_obj_res);
+				eve.sendMsg(CustomReply["strFailUploadLog"] + " " + put_obj_res);
 			}
 
 		}
 		else
 		{
-			eve.sendMsg("没有已开始的日志记录!");
+			eve.sendMsg(CustomReply["strNeverLog"]);
 		}
 	}
 	else if (eve.message == ".log help" || eve.message == ".loghelp")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助");
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 
@@ -266,7 +294,7 @@ EVE_PrivateMsg_EX(eventPrivateMsg)
 	if(eve.message.substr(0,4) == ".log")
 	{
 		eve.message_block();
-		eve.sendMsg(TrpgLoggerVer + "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助\n请注意命令仅会在群/讨论组中生效");
+		eve.sendMsg(TrpgLoggerVer + CustomReply["strLogHlp"]);
 	}
 }
 void save()
