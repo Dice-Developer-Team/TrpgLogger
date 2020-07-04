@@ -1,6 +1,7 @@
 #include "GlobalVar.h"
 #include <string>
 #include <map>
+#include <vector>
 #include <aws/core/Aws.h>
 #include <aws/core/auth/AWSCredentialsProvider.h>
 
@@ -35,6 +36,10 @@ std::map<std::string, std::string> CustomReply
 	{"strFailUploadLog", "上传过程中发生错误，请联系管理员或稍后再次使用此命令重试上传\n错误信息:"},
 	{"strNeverLog", "没有已开始的日志记录!"},
 	{"strLogHlp", "\n.log     \t 启动日志记录\n.log stop\t 停止日志记录\n.log help\t 日志记录帮助"}
+};
+const std::vector<std::string> CustomReplyFilter
+{
+	"self"
 };
 //静态替换
 std::string& replace_all(std::string& str, const std::string& old_value, const std::string& new_value)

@@ -2,6 +2,7 @@
 //
 
 #include <map>
+#include <vector>
 #include <ctime>
 #include <future>
 #include <string>
@@ -76,13 +77,22 @@ EVE_Enable(eventEnable)
 	nlohmann::json CustomReplyJSONobj = freadJson(CustomReplyLoc_UTF8);
 	//加载自定义回执
 	CustomReply["self"] = CQ::getLoginNick();
-	for (const auto &it : CustomReply)
+	for (const auto &it_m : CustomReply)
 	{
-		if (CustomReplyJSONobj.find(it.first) != CustomReplyJSONobj.end())
+		if (CustomReplyJSONobj.find(it_m.first) != CustomReplyJSONobj.end())
 		{
-			CustomReply[it.first] = UTF8ToGBK(CustomReplyJSONobj.find(it.first).value());
+			CustomReply[it_m.first] = UTF8ToGBK(CustomReplyJSONobj.find(it_m.first).value());
 		}
-		replace_all(CustomReply[it.first], "{self}", CustomReply["self"]);
+	}
+	for (const auto& it_m : CustomReply)
+	{
+		if (std::find(CustomReplyFilter.begin(), CustomReplyFilter.end(), it_m.first) == CustomReplyFilter.end())
+		{
+			for (const auto& it_v : CustomReplyFilter)
+			{
+				replace_all(CustomReply[it_m.first], "{" + it_v + "}", CustomReply[it_v]);
+			}
+		}
 	}
 
 	return 0;
